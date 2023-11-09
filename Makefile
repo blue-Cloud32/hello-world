@@ -3,9 +3,10 @@ TEST_ARGS = --verbose --color=yes
 TYPE_CHECK = mypy --strict
 STYLE_CHECK = flake8
 STYLE_FIX = autopep8 --in-place --recursive --aggressive --aggressive
+MAIN = hello.py
 
 .PHONY: all
-all: style-check type-check run-test clean
+all: style-check type-check run-test clean submit
 
 .PHONY: type-check
 type-check:
@@ -35,3 +36,6 @@ push: run-test clean
 .PHONY: fix-style
 fix-style:
 	$(STYLE_FIX) .
+
+submit:
+	kattis -f $(MAIN)
